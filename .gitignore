@@ -1,0 +1,46 @@
+# Misc
+.DS_Store
+*.log
+
+# IDEs/editors
+.idea/
+*.iml
+
+# Dart / Flutter
+.dart_tool/
+.packages
+build/
+coverage/
+pubspec_overrides.yaml
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# FVM (commit config, ignore SDK symlink)
+.fvm/flutter_sdk
+.fvm/flutter_sdk/
+
+# Android
+android/.gradle/
+android/local.properties
+android/key.properties
+**/*.jks
+**/*.keystore
+
+# iOS / macOS
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/App.framework
+ios/Flutter/engine/
+ios/Flutter/.last_build_id
+
+macos/Pods/
+macos/Flutter/Flutter.framework
+macos/Flutter/Flutter.podspec
+macos/Flutter/Generated.xcconfig
+macos/Flutter/ephemeral/
+
+# Windows / Linux build outputs
+linux/flutter/ephemeral/
+windows/flutter/ephemeral/
