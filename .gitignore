@@ -18,6 +18,9 @@ pubspec_overrides.yaml
 # FVM (commit config, ignore SDK symlink)
 .fvm/flutter_sdk
 .fvm/flutter_sdk/
+.fvm/versions/
+.fvm/version
+.fvm/release
 
 # Android
 android/.gradle/
