@@ -24,6 +24,10 @@ fvm flutter run
 ## QA docs
 See `docs/QA_AUTOMATION.md` for the semantic labels and suggested Appium selection strategy.
 
+## GitHub Pages
+This repo includes a GitHub Actions workflow to build Flutter Web and deploy to GitHub Pages:
+`/.github/workflows/deploy_github_pages.yml`
+
 ## Key names (examples)
 - `textfield_name`, `textfield_email`
 - `checkbox_agree`

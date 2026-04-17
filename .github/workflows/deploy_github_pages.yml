@@ -1,0 +1,63 @@
+name: Deploy Flutter Web to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Dart (for FVM)
+        uses: dart-lang/setup-dart@v1
+
+      - name: Install FVM
+        run: |
+          dart pub global activate fvm
+          echo "$HOME/.pub-cache/bin" >> "$GITHUB_PATH"
+          fvm --version
+
+      - name: Install Flutter (via FVM)
+        run: |
+          fvm install
+          fvm flutter --version
+
+      - name: Get dependencies
+        run: fvm flutter pub get
+
+      - name: Build web (GitHub Pages base href)
+        run: fvm flutter build web --release --base-href "/automation-web/"
+
+      - name: SPA fallback (serve index for 404s)
+        run: |
+          touch build/web/.nojekyll
+          cp build/web/index.html build/web/404.html
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/web
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
